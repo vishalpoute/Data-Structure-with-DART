@@ -1,23 +1,19 @@
 import 'dart:io';
+import 'dart:math';
 
-void decimalToBinary(int n) {
-  int decimalNum = n;
-  int binaryNum = 0;
-  int place = 1;
-
+void binary(int n) {
+  int decNum = 0, powIdx = 0;
   while (n > 0) {
-    int rem = n % 2;
-    binaryNum += rem * place;
-    n ~/= 2; 
-    place *= 10;
+    int lastDig = n % 10;
+    decNum += lastDig * pow(2, powIdx).toInt();
+    powIdx++;
+    n ~/= 10; // Integer division for Dart
   }
-
-  stdout.write("Binary number is: $binaryNum\n");
-  stdout.write("Decimal number is: $decimalNum\n");
+  print("Decimal number is: $decNum");
 }
 
-void main(List<String> args) {
-  stdout.write("Enter a decimal number: ");
+void main() {
+  stdout.write("Enter a binary number: ");
   int n = int.parse(stdin.readLineSync()!);
-  decimalToBinary(n);
+  binary(n);
 }
